@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace lab03_wordgame
 {
@@ -6,13 +7,26 @@ namespace lab03_wordgame
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string path = "../../../testFile.txt";
+            CreateFile(path);
+        }
+
+        private static void CreateFile(string path)
+        {
+            using (StreamWriter streamWriter = new StreamWriter(path))
+            {
+                streamWriter.WriteLine("Made it into the test file");
+            }
         }
 
         //public static int Test(int num)
         //{
         //    return num;
         //}
+
+        //test read a file
+
+        //test write a file
 
 
     }
