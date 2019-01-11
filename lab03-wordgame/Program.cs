@@ -171,6 +171,13 @@ namespace lab03_wordgame
             }
         }
 
+        //will need to do a test for this return
+        //returns a random number so 
+        private static int RandomNum()
+        {
+            Random rand = new Random();
+            return rand.Next();
+        }
 
                 //public static int Test(int num)
                 //{
