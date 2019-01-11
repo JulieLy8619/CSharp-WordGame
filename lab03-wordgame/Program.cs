@@ -33,16 +33,17 @@ namespace lab03_wordgame
             }
         }
 
-        private static void ReadFile(string path)
+        private static string[] ReadFile(string path)
         {
             string[] linesFromFile = File.ReadAllLines(path);
             for (int i = 0; i < linesFromFile.Length; i++)
             {
-                Console.WriteLine(linesFromFile[i]);
+                Console.WriteLine(linesFromFile[i]); //just for testing for now
             }
+            return linesFromFile;
         }
 
-        private static void AppendToFile(string path)
+        private static void AddWordToFile(string path)
         {
             using (StreamWriter streamWriter = File.AppendText(path))
             {
@@ -75,15 +76,16 @@ namespace lab03_wordgame
                     Console.WriteLine("That isn't an option");
                     MainMenuSelection();
                 }
-                else //couldnt do while loop because I could enter bad code on first entry
+                else //couldnt do while loop because I could enter bad entry on first entry
                 {
                     switch (userChoiceInt)
                     {
                         case 1: //Start
-                            Console.WriteLine("just for testing, in option 1");
+                            //Console.WriteLine("just for testing, in option 1");
+                            Game();
                             break;
                         case 2: //Admin
-                            Console.WriteLine("just for testing, in option 2");
+                            //Console.WriteLine("just for testing, in option 2");
                             AdminMenuSelection();
                             break;
                         default: // exit
@@ -138,12 +140,16 @@ namespace lab03_wordgame
                     switch (userChoiceInt)
                     {
                         case 1: //view list
-                            Console.WriteLine("just for testing, in option 1");
+                            string[] list = ReadFile("../../../WordFile.txt");
+                            //need a display function and will pass in list
+                            //Console.WriteLine("just for testing, in option 1");
                             break;
                         case 2: //add a word
-                            Console.WriteLine("just for testing, in option 2");
+                            AddWordToFile("../../../ WordFile.txt");
+                            Console.WriteLine("word added to list");
+                            AdminMenuSelection();
                             break;
-                        case 3: //delete  word
+                        case 3: //delete a word
                             Console.WriteLine("just for testing, in option 3");
                             break;
                         default: // exit
@@ -171,12 +177,27 @@ namespace lab03_wordgame
             }
         }
 
-        //will need to do a test for this return
-        //returns a random number so 
-        private static int RandomNum()
+        public static int RandomNum(int topRange)
         {
             Random rand = new Random();
-            return rand.Next();
+            return rand.Next(topRange); //verified random numbers are generating
+        }
+
+        //public static string[] TrackLetters(string[] arr, string guess)
+        //{
+        //    string[] guessArr = new string[26]; //only 26 letters in alphabet
+        //}
+
+        private static void Game()
+        {
+            //create list
+            //read file
+            //using random function (range of readarray length) to pick a number/word from list
+            //display _ for length of word
+            //ask user for a letter guess
+            //check if letter is in the word if yes display letter else _
+            //ask for another until word == word
+            //then ask if want to play again, which recalls this function or go back to main menu
         }
 
                 //public static int Test(int num)

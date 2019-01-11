@@ -6,10 +6,17 @@ namespace lab03_wordgame_unittesting
 {
     public class UnitTest1
     {
-        //[Fact]
-        //public void Test1()
-        //{
-        //    Assert.Equal(1, Program.Test(1)); //just testing the files link up right
-        //}
+        [Fact]
+        public void TestRandomWorks()
+        {
+            Assert.Equal(1, Program.RandomNum(100)); //how can I predict the random #
+        }
+        [Fact]
+        public void TestRandomNotWorks()
+        {
+            Assert.NotEqual(1, Program.RandomNum(10)); //how can I predict the random #
+        }
+
+
     }
 }
