@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab03-wordgame", "lab03-wordgame\lab03-wordgame.csproj", "{92920B25-D3A9-4A9E-918B-303B2936C042}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab03-wordgame-unittesting", "lab03-wordgame-unittesting\lab03-wordgame-unittesting.csproj", "{94F289DE-0342-41CA-8C3F-1F3A749EB373}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92920B25-D3A9-4A9E-918B-303B2936C042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92920B25-D3A9-4A9E-918B-303B2936C042}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92920B25-D3A9-4A9E-918B-303B2936C042}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92920B25-D3A9-4A9E-918B-303B2936C042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94F289DE-0342-41CA-8C3F-1F3A749EB373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94F289DE-0342-41CA-8C3F-1F3A749EB373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94F289DE-0342-41CA-8C3F-1F3A749EB373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94F289DE-0342-41CA-8C3F-1F3A749EB373}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3537D130-C416-47BA-B8B0-3A10FAFA0193}
+	EndGlobalSection
+EndGlobal
