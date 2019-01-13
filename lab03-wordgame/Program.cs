@@ -12,6 +12,7 @@ namespace lab03_wordgame
             MainMenuSelection();
             //CreateFile(path); //create the file when they choose to play a game
             //ReadFile(path); // when in admin and want to see the word list
+            //AddWordToFile(path);
             Console.ReadLine(); //so prog doesn't auto quit
         }
 
@@ -153,7 +154,7 @@ namespace lab03_wordgame
 
                                 break;
                             case 2: //add a word
-                                AddWordToFile("../../../ WordFile.txt");
+                                AddWordToFile("../../../WordFile.txt");
                                 Console.WriteLine("Confirmed added to list");
 
                                 break;

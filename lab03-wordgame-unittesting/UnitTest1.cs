@@ -20,3 +20,13 @@ namespace lab03_wordgame_unittesting
 
     }
 }
+
+/*
+Tests
+Test that your app has the following functionality:
+
+Test that a file can be updated
+Test that a word can be added to a file
+Test that you can retrieve all words from the file
+Test that the word chosen can accurately detect if the letter exists in the word(test that a letter does exist and does not exist)
+*/
