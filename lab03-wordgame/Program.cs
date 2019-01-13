@@ -8,6 +8,7 @@ namespace lab03_wordgame
         static void Main(string[] args)
         {
             string path = "../../../WordFile.txt";
+            CreateFile(path);
             MainMenuSelection();
             //CreateFile(path); //create the file when they choose to play a game
             //ReadFile(path); // when in admin and want to see the word list
@@ -19,7 +20,7 @@ namespace lab03_wordgame
         {
             using (StreamWriter streamWriter = new StreamWriter(path))
             {
-                //defaul word list
+                //default word list
                 streamWriter.WriteLine("SEATTLE");
                 streamWriter.WriteLine("BAT");
                 streamWriter.WriteLine("WASHINGTON");
@@ -57,44 +58,49 @@ namespace lab03_wordgame
         //show main menu
         public static void MainMenuSelection()
         {
-            Console.WriteLine("Make a selection");
-            Console.WriteLine("1: Start a new game");
-            Console.WriteLine("2: Admin");
-            Console.WriteLine("3: Exit");
+            bool loopMainMenu = true;
             try
             {
-                string userChoice = Console.ReadLine();
-                int userChoiceInt = Convert.ToInt32(userChoice);
+                do
+                {
+                    Console.WriteLine("Make a selection");
+                    Console.WriteLine("1: Start a new game");
+                    Console.WriteLine("2: Admin");
+                    Console.WriteLine("3: Exit");
+                    string userChoice = Console.ReadLine();
+                    int userChoiceInt = Convert.ToInt32(userChoice);
 
-                if (userChoiceInt > 4)
-                {
-                    Console.WriteLine("That isn't an option");
-                    MainMenuSelection();
-                }
-                else if (userChoiceInt < 0)
-                {
-                    Console.WriteLine("That isn't an option");
-                    MainMenuSelection();
-                }
-                else //couldnt do while loop because I could enter bad entry on first entry
-                {
-                    switch (userChoiceInt)
+                    if (userChoiceInt > 4)
                     {
-                        case 1: //Start
-                            //Console.WriteLine("just for testing, in option 1");
-                            Game();
-                            break;
-                        case 2: //Admin
-                            //Console.WriteLine("just for testing, in option 2");
-                            AdminMenuSelection();
-                            break;
-                        default: // exit
-                            Console.WriteLine("just for testing, in option 3");
-                            Console.ReadLine();
-                            Environment.Exit(0);
-                            break;
+                        Console.WriteLine("That isn't an option");
+                        loopMainMenu = true;
                     }
-                }
+                    else if (userChoiceInt < 0)
+                    {
+                        Console.WriteLine("That isn't an option");
+                        loopMainMenu = true;
+                    }
+                    else
+                    {
+                        switch (userChoiceInt)
+                        {
+                            case 1: //Start
+                                Game();
+                                loopMainMenu = false;
+                                break;
+                            case 2: //Admin
+                                AdminMenuSelection();
+                                loopMainMenu = false;
+                                break;
+                            default: // exit
+                                Console.WriteLine("just for testing, in option 3");
+                                Console.ReadLine();
+                                loopMainMenu = false;
+                                Environment.Exit(0);
+                                break;
+                        }
+                    }
+                } while (loopMainMenu == true);
             }
             catch (ArgumentNullException)
             {
@@ -115,51 +121,54 @@ namespace lab03_wordgame
         //show admin menu
         public static void AdminMenuSelection()
         {
-            Console.WriteLine("Make a selection");
-            Console.WriteLine("1: View word list");
-            Console.WriteLine("2: Add a word");
-            Console.WriteLine("3: Delete a word");
-            Console.WriteLine("4: Exit Admin");
+            bool loopAdminMenu = true;
             try
             {
-                string userChoice = Console.ReadLine();
-                int userChoiceInt = Convert.ToInt32(userChoice);
+                do
+                {
+                    Console.WriteLine("Make a selection");
+                    Console.WriteLine("1: View word list");
+                    Console.WriteLine("2: Add a word");
+                    Console.WriteLine("3: Delete a word");
+                    Console.WriteLine("4: Go Back to Main Menu");
+                    string userChoice = Console.ReadLine();
+                    int userChoiceInt = Convert.ToInt32(userChoice);
 
-                if (userChoiceInt > 4)
-                {
-                    Console.WriteLine("That isn't an option");
-                    AdminMenuSelection();
-                }
-                else if (userChoiceInt < 0)
-                {
-                    Console.WriteLine("That isn't an option");
-                    AdminMenuSelection();
-                }
-                else //couldnt do while loop because I could enter bad code on first entry
-                {
-                    switch (userChoiceInt)
+                    if (userChoiceInt > 4)
                     {
-                        case 1: //view list
-                            string[] list = ReadFile("../../../WordFile.txt");
-                            //need a display function and will pass in list
-                            //Console.WriteLine("just for testing, in option 1");
-                            break;
-                        case 2: //add a word
-                            AddWordToFile("../../../ WordFile.txt");
-                            Console.WriteLine("word added to list");
-                            AdminMenuSelection();
-                            break;
-                        case 3: //delete a word
-                            Console.WriteLine("just for testing, in option 3");
-                            break;
-                        default: // exit
-                            Console.WriteLine("just for testing, in option 4");
-                            Console.ReadLine();
-                            MainMenuSelection();
-                            //Environment.Exit(0);
-                            break;
+                        Console.WriteLine("That isn't an option");
+                        loopAdminMenu = true;
                     }
-                }
+                    else if (userChoiceInt < 0)
+                    {
+                        Console.WriteLine("That isn't an option");
+                        loopAdminMenu = true;
+                    }
+                    else 
+                    {
+                        switch (userChoiceInt)
+                        {
+                            case 1: //view list
+                                string[] list = ReadFile("../../../WordFile.txt");
+
+                                break;
+                            case 2: //add a word
+                                AddWordToFile("../../../ WordFile.txt");
+                                Console.WriteLine("Confirmed added to list");
+
+                                break;
+                            case 3: //delete a word
+                                Console.WriteLine("just for testing, in option 3");
+                                Console.WriteLine("Confirmed deleted from list");
+                                break;
+                            default: // exit
+                                Console.WriteLine("just for testing, in option 4");
+                                MainMenuSelection();
+                                //Environment.Exit(0);
+                                break;
+                        }
+                    }
+                } while (loopAdminMenu == true);
             }
             catch (ArgumentNullException)
             {
