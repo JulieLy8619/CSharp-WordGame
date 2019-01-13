@@ -38,11 +38,19 @@ namespace lab03_wordgame
         private static string[] ReadFile(string path)
         {
             string[] linesFromFile = File.ReadAllLines(path);
-            for (int i = 0; i < linesFromFile.Length; i++)
-            {
-                Console.WriteLine(linesFromFile[i]); //just for testing for now
-            }
+            //for (int i = 0; i < linesFromFile.Length; i++)
+            //{
+            //    Console.WriteLine(linesFromFile[i]);
+            //}
             return linesFromFile;
+        }
+
+        private static void PrintFile(string[] list)
+        {
+            for (int i = 0; i < list.Length; i++)
+            {
+                Console.WriteLine(list[i]);
+            }
         }
 
         private static void AddWordToFile(string path)
@@ -150,8 +158,8 @@ namespace lab03_wordgame
                         switch (userChoiceInt)
                         {
                             case 1: //view list
-                                string[] list = ReadFile("../../../WordFile.txt");
-
+                                string[] listView = ReadFile("../../../WordFile.txt");
+                                PrintFile(listView);
                                 break;
                             case 2: //add a word
                                 AddWordToFile("../../../WordFile.txt");
@@ -159,7 +167,40 @@ namespace lab03_wordgame
 
                                 break;
                             case 3: //delete a word
-                                Console.WriteLine("just for testing, in option 3");
+                                //Console.WriteLine("just for testing, in option 3");
+                                //might be able to move this to a function later
+                                string[] listDeleteWord = ReadFile("../../../WordFile.txt");
+                                PrintFile(listDeleteWord);
+                                Console.WriteLine("What word would you like to delete?");
+                                string userDeleteChoice = Console.ReadLine();
+                                string userDeleteChoiceCap = userDeleteChoice.ToUpper();
+                                //need to check word is in the list, if yes, delete, else reask for word to delete or exit and say did nothing.
+                                string[] listRevised = new string[listDeleteWord.Length-1]; 
+                                //because of how I set up the IF, I actually try to fill in more indexes than I have (because new is one less
+                                //for (int i = 0; i < listDeleteWord.Length; i++)
+                                //{
+                                //    Console.WriteLine("made it to for loop");
+                                //    Console.WriteLine("============ i ==========" + i);
+                                //    if (listDeleteWord[i] != userDeleteChoiceCap)
+                                //    {
+                                //        Console.WriteLine("in if when word not match");
+                                //        listRevised[i] = listDeleteWord[i];
+                                //    }
+                                //    else if (listDeleteWord[i] == userDeleteChoiceCap)
+                                //    {
+                                //        Console.WriteLine("in if when word match");
+                                //        //for now I will just might have a blank space in my list
+                                //        listRevised[i] = "deleted word spot";
+                                //    }
+                                //    else //i don't get to this situation
+                                //    {
+                                //        Console.WriteLine("in if when word not in list");
+                                //        //word isn't in list
+                                //        Console.WriteLine("You chose a word not in the list, we have exited without taking any actions.");
+                                //        //AdminMenuSelection();
+
+                                //    }
+                                //}
                                 Console.WriteLine("Confirmed deleted from list");
                                 break;
                             default: // exit
@@ -186,7 +227,7 @@ namespace lab03_wordgame
                 Console.WriteLine("Something went wrong");
             }
         }
-
+        
         public static int RandomNum(int topRange)
         {
             Random rand = new Random();
@@ -200,11 +241,20 @@ namespace lab03_wordgame
 
         private static void Game()
         {
-            //create list
             //read file
+            string[] gameList = ReadFile("../../../WordFile.txt");
             //using random function (range of readarray length) to pick a number/word from list
+            int gameWordIndex = RandomNum(gameList.Length);
+            string gameWord = gameList[gameWordIndex];
+            char[] gameWordChar = gameWord.ToCharArray();
             //display _ for length of word
+            for (int i = 0; i < gameWordChar.Length; i++)
+            {
+                Console.Write("_ ");
+            }
+            Console.WriteLine();
             //ask user for a letter guess
+
             //check if letter is in the word if yes display letter else _
             //ask for another until word == word
             //then ask if want to play again, which recalls this function or go back to main menu
@@ -216,3 +266,4 @@ namespace lab03_wordgame
                 //}
     }
 }
+
