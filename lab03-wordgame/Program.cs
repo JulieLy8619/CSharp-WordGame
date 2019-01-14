@@ -36,10 +36,6 @@ namespace lab03_wordgame
         private static string[] ReadFile(string path)
         {
             string[] linesFromFile = File.ReadAllLines(path);
-            //for (int i = 0; i < linesFromFile.Length; i++)
-            //{
-            //    Console.WriteLine(linesFromFile[i]);
-            //}
             return linesFromFile;
         }
 
@@ -60,6 +56,58 @@ namespace lab03_wordgame
                 string userChoiceCap = userChoice.ToUpper();
                 streamWriter.WriteLine(userChoiceCap);
             }
+        }
+
+        private static void DeleteWordFromFile(string path)
+        {
+            string[] listDeleteWord = ReadFile("../../../WordFile.txt");
+            PrintFile(listDeleteWord);
+            Console.WriteLine("What word would you like to delete?");
+            string userDeleteChoice = Console.ReadLine();
+            string userDeleteChoiceCap = userDeleteChoice.ToUpper();
+            Console.WriteLine(userDeleteChoiceCap);
+            //need to check word is in the list, if yes, delete, else re-ask for word to delete or exit and say did nothing.
+            string[] listRevised = new string[listDeleteWord.Length];
+            //because of how I set up the IF, I actually try to fill in more indexes than I have (because new is one less
+            for (int i = 0; i < listDeleteWord.Length; i++)
+            {
+                //Console.WriteLine("made it to for loop");
+                Console.WriteLine("============ word from list ==========" + listDeleteWord[i]);
+                if (listDeleteWord[i] != userDeleteChoiceCap)
+                {
+                    Console.WriteLine("in if when word not match");
+                    listRevised[i] = listDeleteWord[i];
+                }
+                else if (listDeleteWord[i] == userDeleteChoiceCap)
+                {
+                    Console.WriteLine("in if when word match");
+                    //for now I will just might have a blank space in my list
+                    listRevised[i] = "deleted word spot";
+                    Console.WriteLine("value of array cell when i find the word: " + listRevised[i]);
+                }
+                else //i don't get to this situation
+                {
+                    Console.WriteLine("in if when word not in list");
+                    //word isn't in list
+                    Console.WriteLine("You chose a word not in the list, we have exited without taking any actions.");
+                    //AdminMenuSelection();
+                }
+            }
+
+            //this should write over the old file with the new file with the revised list of words
+            using (StreamWriter streamWriter = new StreamWriter(path))
+            {
+                for (int j = 0; j < listRevised.Length; j++)
+                {
+                    streamWriter.WriteLine(listRevised[j]);
+                }
+            }
+            Console.WriteLine("=====print list in delete function======");
+            for (int k = 0; k < listRevised.Length; k++)
+            {
+                Console.WriteLine(listRevised[k]);
+            }
+
         }
 
         //show main menu
@@ -165,41 +213,9 @@ namespace lab03_wordgame
 
                                 break;
                             case 3: //delete a word
-                                //Console.WriteLine("just for testing, in option 3");
                                 //might be able to move this to a function later
-                                string[] listDeleteWord = ReadFile("../../../WordFile.txt");
-                                PrintFile(listDeleteWord);
-                                Console.WriteLine("What word would you like to delete?");
-                                string userDeleteChoice = Console.ReadLine();
-                                string userDeleteChoiceCap = userDeleteChoice.ToUpper();
-                                //need to check word is in the list, if yes, delete, else reask for word to delete or exit and say did nothing.
-                                string[] listRevised = new string[listDeleteWord.Length-1]; 
-                                //because of how I set up the IF, I actually try to fill in more indexes than I have (because new is one less
-                                //for (int i = 0; i < listDeleteWord.Length; i++)
-                                //{
-                                //    Console.WriteLine("made it to for loop");
-                                //    Console.WriteLine("============ i ==========" + i);
-                                //    if (listDeleteWord[i] != userDeleteChoiceCap)
-                                //    {
-                                //        Console.WriteLine("in if when word not match");
-                                //        listRevised[i] = listDeleteWord[i];
-                                //    }
-                                //    else if (listDeleteWord[i] == userDeleteChoiceCap)
-                                //    {
-                                //        Console.WriteLine("in if when word match");
-                                //        //for now I will just might have a blank space in my list
-                                //        listRevised[i] = "deleted word spot";
-                                //    }
-                                //    else //i don't get to this situation
-                                //    {
-                                //        Console.WriteLine("in if when word not in list");
-                                //        //word isn't in list
-                                //        Console.WriteLine("You chose a word not in the list, we have exited without taking any actions.");
-                                //        //AdminMenuSelection();
-
-                                //    }
-                                //}
-                                Console.WriteLine("Confirmed deleted from list");
+                                DeleteWordFromFile("../../../WordFile.txt");
+                                //Console.WriteLine("Confirmed deleted from list"); can't confirm if they put in goop
                                 break;
                             default: // go back to main menu
                                 //Console.WriteLine("just for testing, in option 4");
@@ -390,7 +406,7 @@ namespace lab03_wordgame
                     break;
                 }
             }
-            Console.WriteLine("===========" + answerToReturn);
+            //Console.WriteLine("===========" + answerToReturn);
             return answerToReturn;
         }
     }
