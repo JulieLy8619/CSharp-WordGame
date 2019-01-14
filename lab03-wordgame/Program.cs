@@ -9,10 +9,8 @@ namespace lab03_wordgame
         {
             string path = "../../../WordFile.txt";
             CreateFile(path);
+            Console.WriteLine("Welcome to the Word Guessing game");
             MainMenuSelection();
-            //CreateFile(path); //create the file when they choose to play a game
-            //ReadFile(path); // when in admin and want to see the word list
-            //AddWordToFile(path);
             Console.ReadLine(); //so prog doesn't auto quit
         }
 
@@ -79,7 +77,7 @@ namespace lab03_wordgame
                     string userChoice = Console.ReadLine();
                     int userChoiceInt = Convert.ToInt32(userChoice);
 
-                    if (userChoiceInt > 4)
+                    if (userChoiceInt > 3)
                     {
                         Console.WriteLine("That isn't an option");
                         loopMainMenu = true;
@@ -118,7 +116,7 @@ namespace lab03_wordgame
             }
             catch (FormatException)
             {
-                Console.WriteLine("There was an error reading your input, please try again.");
+                Console.WriteLine("There was an error reading your input, RESTART");
                 MainMenuSelection();
             }
             catch (Exception) //general
@@ -203,8 +201,8 @@ namespace lab03_wordgame
                                 //}
                                 Console.WriteLine("Confirmed deleted from list");
                                 break;
-                            default: // exit
-                                Console.WriteLine("just for testing, in option 4");
+                            default: // go back to main menu
+                                //Console.WriteLine("just for testing, in option 4");
                                 MainMenuSelection();
                                 //Environment.Exit(0);
                                 break;
@@ -264,48 +262,112 @@ namespace lab03_wordgame
             {
                 gameWordGuessChar[i] = Convert.ToChar("_");
             }
-            printArray(gameWordGuessChar);
-            Console.WriteLine();
+            //printArray(gameWordGuessChar);
+            //Console.WriteLine();
 
 
             //new array to hold user's guesses
             char[] userLetterGuessesSoFar = new char[26]; // only 26 letters in alphabet
             //set up for do while
+            //bool gameSolved = false;
             bool gameSolved = false;
             int guessCounter = 0;
 
             do
             {
-                //ask user for a letter guess
-                Console.WriteLine("Guess a letter?");
-                string userLetterGuess = Console.ReadLine();
-                string userLetterGuessCap = userLetterGuess.ToUpper();
-                char userLetterGuessChar = Convert.ToChar(userLetterGuessCap);
-
-                //check if the letter is in the word
-                bool letterInWord = gameWord.Contains(userLetterGuessCap);
-                //walk through word array and if letter matches print letter, else _
-                if (letterInWord == true)
+                gameSolved = CheckedForWinner(gameWordChar, gameWordGuessChar);
+                //check if word matches otherwise do the rest of this loop
+                if (gameSolved == true)
                 {
-                    for (int j = 0; j < gameWordChar.Length; j++)
+                    printArray(gameWordGuessChar);
+                    Console.WriteLine();
+                    bool playAgainBoolLoop = true;
+                    Console.WriteLine("Congrats you won!!!");
+                    try
                     {
-                        if (gameWordChar[j] == userLetterGuessChar)
+                        do
                         {
-                            gameWordGuessChar[j] = userLetterGuessChar;
-                            //userLetterGuessesSoFar[guessCounter] = userLetterGuessChar;
-                            //guessCounter++;
-                        }
+                            Console.WriteLine("Would you like to play again?");
+                            Console.WriteLine("1: Yes please");
+                            Console.WriteLine("2: No thank you");
+                            string userPlayChoice = Console.ReadLine();
+                            int userPlayChoiceInt = Convert.ToInt32(userPlayChoice);
+                            if (userPlayChoiceInt > 2)
+                            {
+                                Console.WriteLine("That isn't an option");
+                                playAgainBoolLoop = true;
+                            }
+                            else if (userPlayChoiceInt < 0)
+                            {
+                                Console.WriteLine("That isn't an option");
+                                playAgainBoolLoop = true;
+                            }
+                            else
+                            {
+                                switch (userPlayChoiceInt)
+                                {
+                                    case 1: //Yes
+                                        playAgainBoolLoop = false;
+                                        Game();
+                                        break;
+                                    case 2: //No
+                                        Environment.Exit(0);
+                                        break;
+                                }
+                            }
+                        } while (playAgainBoolLoop == true);
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        Console.WriteLine("You didn't make an entry. Try again.");
+                        AdminMenuSelection();
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("There was an error reading your input, please try again.");
+                        AdminMenuSelection();
+                    }
+                    catch (Exception) //general
+                    {
+                        Console.WriteLine("Something went wrong");
                     }
                 }
-                userLetterGuessesSoFar[guessCounter] = userLetterGuessChar;
-                guessCounter++;
-                Console.WriteLine("Word you are trying to guess: ");
-                printArray(gameWordGuessChar);
-                Console.WriteLine(); //just because I like space
-                Console.WriteLine("Letters you have guessed so far: ");
-                printArray(userLetterGuessesSoFar);
-                Console.WriteLine(); //just because I like space
+                else
+                {
+                    Console.WriteLine("Word you are trying to guess: ");
+                    printArray(gameWordGuessChar);
+                    Console.WriteLine(); //just because I like space
+                    Console.WriteLine("Letters you have guessed so far: ");
+                    printArray(userLetterGuessesSoFar);
+                    Console.WriteLine(); //just because I like space
+                                         //ask user for a letter guess
+                    Console.WriteLine("Guess a letter?");
+                    string userLetterGuess = Console.ReadLine();
+                    string userLetterGuessCap = userLetterGuess.ToUpper();
+                    char userLetterGuessChar = Convert.ToChar(userLetterGuessCap);
+
+                    //check if the letter is in the word
+                    bool letterInWord = gameWord.Contains(userLetterGuessCap);
+                    //walk through word array and if letter matches print letter, else _
+                    if (letterInWord == true)
+                    {
+                        for (int j = 0; j < gameWordChar.Length; j++)
+                        {
+                            if (gameWordChar[j] == userLetterGuessChar)
+                            {
+                                gameWordGuessChar[j] = userLetterGuessChar;
+                                //userLetterGuessesSoFar[guessCounter] = userLetterGuessChar;
+                                //guessCounter++;
+                            }
+                        }
+                    }
+                    userLetterGuessesSoFar[guessCounter] = userLetterGuessChar;
+                    guessCounter++;
+                }
             } while (gameSolved == false);
+
+
+            //if game solved true then say congrats and something for if they want to play again
             //need to figure out where to add their guess to the array
 
             //check if user input was a letter and a letter they haven't guessed before
@@ -313,7 +375,23 @@ namespace lab03_wordgame
             //ask for another until word == word
             //then ask if want to play again
             //currently it doesn't verify they are guessing ONlY letters
+            //poss solution is an array of 26 letters that we compare against, but it doesn't stop them from guessing a 10 times over
+            //unless i remove it from the array as they guess...
 
+        }
+        private static bool CheckedForWinner(char[] correctWord, char[] testWord)
+        {
+            bool answerToReturn = true;
+            for (int i = 0; i < correctWord.Length; i++)
+            {
+                if (correctWord[i] != testWord[i])
+                {
+                    answerToReturn = false;
+                    break;
+                }
+            }
+            Console.WriteLine("===========" + answerToReturn);
+            return answerToReturn;
         }
     }
 }
