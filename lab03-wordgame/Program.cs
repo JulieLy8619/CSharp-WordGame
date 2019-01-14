@@ -239,6 +239,14 @@ namespace lab03_wordgame
         //    string[] guessArr = new string[26]; //only 26 letters in alphabet
         //}
 
+        private static void printArray(char[] arr)
+        {
+            for (int k = 0; k < arr.Length; k++)
+            {
+                Console.Write(arr[k] + " ");
+            }
+        }
+
         private static void Game()
         {
             //read file
@@ -246,24 +254,67 @@ namespace lab03_wordgame
             //using random function (range of readarray length) to pick a number/word from list
             int gameWordIndex = RandomNum(gameList.Length);
             string gameWord = gameList[gameWordIndex];
-            char[] gameWordChar = gameWord.ToCharArray();
-            //display _ for length of word
-            for (int i = 0; i < gameWordChar.Length; i++)
-            {
-                Console.Write("_ ");
-            }
-            Console.WriteLine();
-            //ask user for a letter guess
 
+            //convert the word to a char array
+            char[] gameWordChar = gameWord.ToCharArray(); //this is the answer key
+            char[] gameWordGuessChar = new char[gameWordChar.Length]; //this is the array user will see
+
+            //fill in what user will see for word with _
+            for (int i = 0; i < gameWordGuessChar.Length; i++)
+            {
+                gameWordGuessChar[i] = Convert.ToChar("_");
+            }
+            printArray(gameWordGuessChar);
+            Console.WriteLine();
+
+
+            //new array to hold user's guesses
+            char[] userLetterGuessesSoFar = new char[26]; // only 26 letters in alphabet
+            //set up for do while
+            bool gameSolved = false;
+            int guessCounter = 0;
+
+            do
+            {
+                //ask user for a letter guess
+                Console.WriteLine("Guess a letter?");
+                string userLetterGuess = Console.ReadLine();
+                string userLetterGuessCap = userLetterGuess.ToUpper();
+                char userLetterGuessChar = Convert.ToChar(userLetterGuessCap);
+
+                //check if the letter is in the word
+                bool letterInWord = gameWord.Contains(userLetterGuessCap);
+                //walk through word array and if letter matches print letter, else _
+                if (letterInWord == true)
+                {
+                    for (int j = 0; j < gameWordChar.Length; j++)
+                    {
+                        if (gameWordChar[j] == userLetterGuessChar)
+                        {
+                            gameWordGuessChar[j] = userLetterGuessChar;
+                            //userLetterGuessesSoFar[guessCounter] = userLetterGuessChar;
+                            //guessCounter++;
+                        }
+                    }
+                }
+                userLetterGuessesSoFar[guessCounter] = userLetterGuessChar;
+                guessCounter++;
+                Console.WriteLine("Word you are trying to guess: ");
+                printArray(gameWordGuessChar);
+                Console.WriteLine(); //just because I like space
+                Console.WriteLine("Letters you have guessed so far: ");
+                printArray(userLetterGuessesSoFar);
+                Console.WriteLine(); //just because I like space
+            } while (gameSolved == false);
+            //need to figure out where to add their guess to the array
+
+            //check if user input was a letter and a letter they haven't guessed before
             //check if letter is in the word if yes display letter else _
             //ask for another until word == word
-            //then ask if want to play again, which recalls this function or go back to main menu
-        }
+            //then ask if want to play again
+            //currently it doesn't verify they are guessing ONlY letters
 
-                //public static int Test(int num)
-                //{
-                //    return num;
-                //}
+        }
     }
 }
 
