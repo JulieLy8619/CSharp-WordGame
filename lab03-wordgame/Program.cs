@@ -65,32 +65,25 @@ namespace lab03_wordgame
             Console.WriteLine("What word would you like to delete?");
             string userDeleteChoice = Console.ReadLine();
             string userDeleteChoiceCap = userDeleteChoice.ToUpper();
-            Console.WriteLine(userDeleteChoiceCap);
-            //need to check word is in the list, if yes, delete, else re-ask for word to delete or exit and say did nothing.
             string[] listRevised = new string[listDeleteWord.Length];
-            //because of how I set up the IF, I actually try to fill in more indexes than I have (because new is one less
             for (int i = 0; i < listDeleteWord.Length; i++)
             {
                 //Console.WriteLine("made it to for loop");
-                Console.WriteLine("============ word from list ==========" + listDeleteWord[i]);
                 if (listDeleteWord[i] != userDeleteChoiceCap)
                 {
-                    Console.WriteLine("in if when word not match");
                     listRevised[i] = listDeleteWord[i];
                 }
                 else if (listDeleteWord[i] == userDeleteChoiceCap)
                 {
-                    Console.WriteLine("in if when word match");
-                    //for now I will just might have a blank space in my list
-                    listRevised[i] = "deleted word spot";
-                    Console.WriteLine("value of array cell when i find the word: " + listRevised[i]);
+                    listRevised[i] = "======Deleted Word Spot======";
                 }
-                else //i don't get to this situation
+                else //I don't seem to hit this ELSE
                 {
-                    Console.WriteLine("in if when word not in list");
                     //word isn't in list
                     Console.WriteLine("You chose a word not in the list, we have exited without taking any actions.");
-                    //AdminMenuSelection();
+                    Console.WriteLine("Press enter to continue...");
+                    Console.ReadLine();
+                    break;
                 }
             }
 
@@ -102,12 +95,11 @@ namespace lab03_wordgame
                     streamWriter.WriteLine(listRevised[j]);
                 }
             }
-            Console.WriteLine("=====print list in delete function======");
+            Console.WriteLine("Revised list:  (if you selected a word from the list)");
             for (int k = 0; k < listRevised.Length; k++)
             {
                 Console.WriteLine(listRevised[k]);
             }
-
         }
 
         //show main menu
@@ -213,14 +205,10 @@ namespace lab03_wordgame
 
                                 break;
                             case 3: //delete a word
-                                //might be able to move this to a function later
                                 DeleteWordFromFile("../../../WordFile.txt");
-                                //Console.WriteLine("Confirmed deleted from list"); can't confirm if they put in goop
                                 break;
                             default: // go back to main menu
-                                //Console.WriteLine("just for testing, in option 4");
                                 MainMenuSelection();
-                                //Environment.Exit(0);
                                 break;
                         }
                     }
@@ -245,13 +233,8 @@ namespace lab03_wordgame
         public static int RandomNum(int topRange)
         {
             Random rand = new Random();
-            return rand.Next(topRange); //verified random numbers are generating
+            return rand.Next(topRange);
         }
-
-        //public static string[] TrackLetters(string[] arr, string guess)
-        //{
-        //    string[] guessArr = new string[26]; //only 26 letters in alphabet
-        //}
 
         private static void printArray(char[] arr)
         {
@@ -278,14 +261,9 @@ namespace lab03_wordgame
             {
                 gameWordGuessChar[i] = Convert.ToChar("_");
             }
-            //printArray(gameWordGuessChar);
-            //Console.WriteLine();
-
 
             //new array to hold user's guesses
             char[] userLetterGuessesSoFar = new char[26]; // only 26 letters in alphabet
-            //set up for do while
-            //bool gameSolved = false;
             bool gameSolved = false;
             int guessCounter = 0;
 
@@ -356,7 +334,7 @@ namespace lab03_wordgame
                     Console.WriteLine("Letters you have guessed so far: ");
                     printArray(userLetterGuessesSoFar);
                     Console.WriteLine(); //just because I like space
-                                         //ask user for a letter guess
+                    //ask user for a letter guess
                     Console.WriteLine("Guess a letter?");
                     string userLetterGuess = Console.ReadLine();
                     string userLetterGuessCap = userLetterGuess.ToUpper();
@@ -372,8 +350,6 @@ namespace lab03_wordgame
                             if (gameWordChar[j] == userLetterGuessChar)
                             {
                                 gameWordGuessChar[j] = userLetterGuessChar;
-                                //userLetterGuessesSoFar[guessCounter] = userLetterGuessChar;
-                                //guessCounter++;
                             }
                         }
                     }
@@ -381,19 +357,6 @@ namespace lab03_wordgame
                     guessCounter++;
                 }
             } while (gameSolved == false);
-
-
-            //if game solved true then say congrats and something for if they want to play again
-            //need to figure out where to add their guess to the array
-
-            //check if user input was a letter and a letter they haven't guessed before
-            //check if letter is in the word if yes display letter else _
-            //ask for another until word == word
-            //then ask if want to play again
-            //currently it doesn't verify they are guessing ONlY letters
-            //poss solution is an array of 26 letters that we compare against, but it doesn't stop them from guessing a 10 times over
-            //unless i remove it from the array as they guess...
-
         }
         private static bool CheckedForWinner(char[] correctWord, char[] testWord)
         {
@@ -406,9 +369,12 @@ namespace lab03_wordgame
                     break;
                 }
             }
-            //Console.WriteLine("===========" + answerToReturn);
             return answerToReturn;
         }
     }
 }
 
+
+//currently it doesn't verify they are guessing ONlY letters
+//poss solution is an array of 26 letters that we compare against, but it doesn't stop them from guessing a 10 times over
+//unless i remove it from the array as they guess...
