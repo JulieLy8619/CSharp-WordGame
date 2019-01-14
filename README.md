@@ -20,8 +20,8 @@ As a user, you are presented with a menu to play the game or administrate the wo
 If you choose to play then the program will pick a random word from the word bank and display it as blank spaces. One would then make guesses at letters, and as one finds the letters it will fill in the blanks.
 If you choose to be admin, one could view the word bank, add to the word bank, or to remove a word from the word bank.
 
-![happyGame] (./images/HappyPathGame.pdf) //for when I am ready to put in my image (console)
-![happyAdmin] (./images/happyPathForAdmin.pdf) //for when I am ready to put in my image (testing)
+![happyGame] (./images/HappyPathGame.pdf) 
+![happyAdmin] (./images/happyPathForAdmin.pdf) 
 
 There is a known bug in regards to the delete word from word bank.
 
