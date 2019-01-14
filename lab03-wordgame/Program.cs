@@ -5,6 +5,10 @@ namespace lab03_wordgame
 {
     public class Program
     {
+        /// <summary>
+        /// main program that starts it off
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             string path = "../../../WordFile.txt";
@@ -15,7 +19,11 @@ namespace lab03_wordgame
         }
 
         //sets up default word list
-        private static void CreateFile(string path)
+        /// <summary>
+        /// Creates the file of default words
+        /// </summary>
+        /// <param name="path">Path where one wants to save the file</param>
+        public static void CreateFile(string path)
         {
             using (StreamWriter streamWriter = new StreamWriter(path))
             {
@@ -33,13 +41,22 @@ namespace lab03_wordgame
             }
         }
 
-        private static string[] ReadFile(string path)
+        /// <summary>
+        /// read words from file
+        /// </summary>
+        /// <param name="path">path where file is located</param>
+        /// <returns>returns an array of the words from the file</returns>
+        public static string[] ReadFile(string path)
         {
             string[] linesFromFile = File.ReadAllLines(path);
             return linesFromFile;
         }
 
-        private static void PrintFile(string[] list)
+        /// <summary>
+        /// prints words to screen(console) 
+        /// </summary>
+        /// <param name="list">takes in an array of words</param>
+        public static void PrintFile(string[] list)
         {
             for (int i = 0; i < list.Length; i++)
             {
@@ -47,7 +64,11 @@ namespace lab03_wordgame
             }
         }
 
-        private static void AddWordToFile(string path)
+        /// <summary>
+        /// adds a word to the file
+        /// </summary>
+        /// <param name="path">path of the file location</param>
+        public static void AddWordToFile(string path)
         {
             using (StreamWriter streamWriter = File.AppendText(path))
             {
@@ -58,7 +79,11 @@ namespace lab03_wordgame
             }
         }
 
-        private static void DeleteWordFromFile(string path)
+        /// <summary>
+        /// deletes word from file
+        /// </summary>
+        /// <param name="path">needs location of file to read</param>
+        public static void DeleteWordFromFile(string path)
         {
             string[] listDeleteWord = ReadFile("../../../WordFile.txt");
             PrintFile(listDeleteWord);
@@ -103,6 +128,9 @@ namespace lab03_wordgame
         }
 
         //show main menu
+        /// <summary>
+        /// shows the opening menu
+        /// </summary>
         public static void MainMenuSelection()
         {
             bool loopMainMenu = true;
@@ -166,6 +194,9 @@ namespace lab03_wordgame
         }
 
         //show admin menu
+        /// <summary>
+        /// shows the admin menu
+        /// </summary>
         public static void AdminMenuSelection()
         {
             bool loopAdminMenu = true;
@@ -230,13 +261,22 @@ namespace lab03_wordgame
             }
         }
         
+        /// <summary>
+        /// generates a random number
+        /// </summary>
+        /// <param name="topRange">takes in ceiling of range to pick a random number from 0 to ceiling</param>
+        /// <returns>returns the random number</returns>
         public static int RandomNum(int topRange)
         {
             Random rand = new Random();
             return rand.Next(topRange);
         }
 
-        private static void printArray(char[] arr)
+        /// <summary>
+        /// prints word to screen
+        /// </summary>
+        /// <param name="arr">takes in an array of letters that make up the word</param>
+        public static void printArray(char[] arr)
         {
             for (int k = 0; k < arr.Length; k++)
             {
@@ -244,7 +284,10 @@ namespace lab03_wordgame
             }
         }
 
-        private static void Game()
+        /// <summary>
+        /// this is THE game, it will pick the word, it will continuously ask the user for letters until puzzle is solved then ask if they want to play again or not
+        /// </summary>
+        public static void Game()
         {
             //read file
             string[] gameList = ReadFile("../../../WordFile.txt");
@@ -358,7 +401,14 @@ namespace lab03_wordgame
                 }
             } while (gameSolved == false);
         }
-        private static bool CheckedForWinner(char[] correctWord, char[] testWord)
+
+        /// <summary>
+        /// checks for a winner in the game
+        /// </summary>
+        /// <param name="correctWord">needs to know what is the right word</param>
+        /// <param name="testWord">needs to know what word the user has guessed</param>
+        /// <returns>true or false for if the user is a winner</returns>
+        public static bool CheckedForWinner(char[] correctWord, char[] testWord)
         {
             bool answerToReturn = true;
             for (int i = 0; i < correctWord.Length; i++)
