@@ -6,5 +6,5 @@ SQUASH
 MISSISSIPPI
 SCIENTIST
 TEN
-======Deleted Word Spot======
+CLASS
 STUDENT
