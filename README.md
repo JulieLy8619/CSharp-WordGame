@@ -22,6 +22,7 @@ If you choose to be admin, one could view the word bank, add to the word bank, o
 
 ![happyGame](./images/HappyPathGame.pdf) 
 ![happyAdmin](./images/happyPathForAdmin.pdf) 
+![testsWork](./images/testswork.JPG)
 
 There is a known bug in regards to the delete word from word bank.
 

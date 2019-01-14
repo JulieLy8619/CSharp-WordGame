@@ -23,7 +23,7 @@ namespace lab03_wordgame
         /// Creates the file of default words
         /// </summary>
         /// <param name="path">Path where one wants to save the file</param>
-        private static void CreateFile(string path)
+        public static void CreateFile(string path)
         {
             using (StreamWriter streamWriter = new StreamWriter(path))
             {
@@ -46,7 +46,7 @@ namespace lab03_wordgame
         /// </summary>
         /// <param name="path">path where file is located</param>
         /// <returns>returns an array of the words from the file</returns>
-        private static string[] ReadFile(string path)
+        public static string[] ReadFile(string path)
         {
             string[] linesFromFile = File.ReadAllLines(path);
             return linesFromFile;
@@ -56,7 +56,7 @@ namespace lab03_wordgame
         /// prints words to screen(console) 
         /// </summary>
         /// <param name="list">takes in an array of words</param>
-        private static void PrintFile(string[] list)
+        public static void PrintFile(string[] list)
         {
             for (int i = 0; i < list.Length; i++)
             {
@@ -68,7 +68,7 @@ namespace lab03_wordgame
         /// adds a word to the file
         /// </summary>
         /// <param name="path">path of the file location</param>
-        private static void AddWordToFile(string path)
+        public static void AddWordToFile(string path)
         {
             using (StreamWriter streamWriter = File.AppendText(path))
             {
@@ -83,7 +83,7 @@ namespace lab03_wordgame
         /// deletes word from file
         /// </summary>
         /// <param name="path">needs location of file to read</param>
-        private static void DeleteWordFromFile(string path)
+        public static void DeleteWordFromFile(string path)
         {
             string[] listDeleteWord = ReadFile("../../../WordFile.txt");
             PrintFile(listDeleteWord);
@@ -276,7 +276,7 @@ namespace lab03_wordgame
         /// prints word to screen
         /// </summary>
         /// <param name="arr">takes in an array of letters that make up the word</param>
-        private static void printArray(char[] arr)
+        public static void printArray(char[] arr)
         {
             for (int k = 0; k < arr.Length; k++)
             {
@@ -287,7 +287,7 @@ namespace lab03_wordgame
         /// <summary>
         /// this is THE game, it will pick the word, it will continuously ask the user for letters until puzzle is solved then ask if they want to play again or not
         /// </summary>
-        private static void Game()
+        public static void Game()
         {
             //read file
             string[] gameList = ReadFile("../../../WordFile.txt");
@@ -408,7 +408,7 @@ namespace lab03_wordgame
         /// <param name="correctWord">needs to know what is the right word</param>
         /// <param name="testWord">needs to know what word the user has guessed</param>
         /// <returns>true or false for if the user is a winner</returns>
-        private static bool CheckedForWinner(char[] correctWord, char[] testWord)
+        public static bool CheckedForWinner(char[] correctWord, char[] testWord)
         {
             bool answerToReturn = true;
             for (int i = 0; i < correctWord.Length; i++)
