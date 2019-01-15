@@ -68,14 +68,14 @@ namespace lab03_wordgame
         /// adds a word to the file
         /// </summary>
         /// <param name="path">path of the file location</param>
-        public static void AddWordToFile(string path)
+        public static void AddWordToFile(string path, string wordToAdd)
         {
             using (StreamWriter streamWriter = File.AppendText(path))
             {
-                Console.WriteLine("What word would you like to add to the list?");
-                string userChoice = Console.ReadLine();
-                string userChoiceCap = userChoice.ToUpper();
-                streamWriter.WriteLine(userChoiceCap);
+                //Console.WriteLine("What word would you like to add to the list?");
+                //string userChoice = Console.ReadLine();
+                //string userChoiceCap = userChoice.ToUpper();
+                streamWriter.WriteLine(wordToAdd);
             }
         }
 
@@ -231,7 +231,10 @@ namespace lab03_wordgame
                                 PrintFile(listView);
                                 break;
                             case 2: //add a word
-                                AddWordToFile("../../../WordFile.txt");
+                                Console.WriteLine("What word would you like to add to the list?");
+                                string userAddChoice = Console.ReadLine();
+                                string userChoiceCap = userAddChoice.ToUpper();
+                                AddWordToFile("../../../WordFile.txt", userChoiceCap);
                                 Console.WriteLine("Confirmed added to list");
 
                                 break;

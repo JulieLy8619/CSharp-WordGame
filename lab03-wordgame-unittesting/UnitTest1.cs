@@ -22,7 +22,8 @@ namespace lab03_wordgame_unittesting
         public void TestWordAdded()
         {
             //if the length grows then a word was added
-            Program.AddWordToFile("../../../ WordFile.txt");
+            Program.CreateFile("../../../ WordFile.txt");
+            Program.AddWordToFile("../../../ WordFile.txt", "ANEWWORD");
             string[] linesFromFile = File.ReadAllLines("../../../ WordFile.txt");
             Assert.Equal(11, linesFromFile.Length);
 
